@@ -1,0 +1,26 @@
+#!/bin/bash
+iqn="$1"
+blockIp="$2"
+iqn1="$3"
+blockIp="$4"
+sudo iscsiadm -m node -o new -T $iqn -p $blockIp:3260
+sudo iscsiadm -m node -o update -T $iqn -n node.startup -v automatic
+sudo iscsiadm -m node -T $iqn -p $blockIp:3260 -l
+sudo iscsiadm -m node -o new -T $iqn1 -p $blockIp1:3260
+sudo iscsiadm -m node -o update -T $iqn1 -n node.startup -v automatic
+sudo iscsiadm -m node -T $iqn1 -p $blockIp1:3260 -l
+sudo apt-get update
+sudo apt-get install lvm2 -y
+cd /
+sudo pvcreate /dev/sdb
+sudo pvcreate /dev/sdc
+sudo vgcreate data_volume /dev/sdb
+sudo vgextend data_volume /dev/sdc
+sudo lvcreate -l 20 -n logical_volume data_volume
+sudo mkfs -t ext4 /dev/data_volume/logical_volume
+sudo mkdir /data
+sudo chmod 777 /etc/fstab
+sudo echo  "/dev/data-volume/logical_volume  /data  ext4  defaults  0  2" >> /etc/fstab
+sudo chmod 644 /etc/fstab
+sudo mount -a
+sudo mount
