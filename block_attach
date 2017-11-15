@@ -25,4 +25,5 @@ sudo mkdir /data
 sudo chmod 777 /etc/fstab
 sudo echo  "/dev/data_volume/logical_volume  /data  ext4  defaults  0  2" >> /etc/fstab
 sudo chmod 644 /etc/fstab
+sudo mount -a
 sudo mount
