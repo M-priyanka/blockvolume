@@ -23,6 +23,6 @@ sudo lvcreate -l 20 -n logical_volume data_volume
 sudo mkfs -t ext4 /dev/data_volume/logical_volume
 sudo mkdir /data
 sudo chmod 777 /etc/fstab
-sudo echo  "/dev/data-volume/logical_volume  /data  ext4  defaults  0  2" >> /etc/fstab
+sudo echo  "/dev/data_volume/logical_volume  /data  ext4  defaults  0  2" >> /etc/fstab
 sudo chmod 644 /etc/fstab
 sudo mount
