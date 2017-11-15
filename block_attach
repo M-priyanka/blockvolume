@@ -4,8 +4,6 @@ iqn=$1
 blockIp=$2
 iqn1=$3
 blockIp1=$4
-echo $iqn >> /tmp/log
-echo $blockIp >> /tmp/log
 sudo iscsiadm -m node -o new -T $iqn -p $blockIp:3260
 sudo iscsiadm -m node -o update -T $iqn -n node.startup -v automatic
 sudo iscsiadm -m node -T $iqn -p $blockIp:3260 -l
@@ -25,5 +23,4 @@ sudo mkdir /data
 sudo chmod 777 /etc/fstab
 sudo echo  "/dev/data-volume/logical_volume  /data  ext4  defaults  0  2" >> /etc/fstab
 sudo chmod 644 /etc/fstab
-sudo mount -a
 sudo mount
