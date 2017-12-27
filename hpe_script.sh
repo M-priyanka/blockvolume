@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo useradd dbadmin
+sudo echo -e "dbadmin ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 sleep 5
 
 ##Install needed Packages
