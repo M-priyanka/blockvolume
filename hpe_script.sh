@@ -158,3 +158,5 @@ sudo service sshd restart
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 sudo echo Afterenabling the ports >> /home/dbadmin/stepfile
+#restarting the tomcat server
+sudo /opt/apache-tomcat-8.0.41/bin/startup.sh
