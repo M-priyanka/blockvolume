@@ -162,19 +162,17 @@ sudo sed -i 's/ChallengeResponseAuthentication .*no$/ChallengeResponseAuthentica
 sleep 5
 
 #Firewall add to the vm
+sudo yum update -y
+sudo systemctl start firewalld
+sudo systemctl status firewalld
 sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
 sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
 sudo firewall-cmd --zone=public --add-port=5433/tcp --permanent
-
 sudo firewall-cmd --reload
 sudo firewall-cmd --list-ports
-
-sleep 5
-sudo service sshd restart
-sudo systemctl stop firewalld
-sudo systemctl disable firewalld
-sudo echo Afterenabling the ports >> /home/dbadmin/stepfile
+sudo reboot
+sleep 10
 
 #restarting the tomcat server
 sudo /opt/apache-tomcat-8.0.41/bin/startup.sh
@@ -183,4 +181,6 @@ sudo service sshd restart
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 
-sudo reboot
+
+
+
