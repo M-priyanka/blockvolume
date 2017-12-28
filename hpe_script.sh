@@ -1,20 +1,5 @@
 #!/bin/bash
 
-iqn=$1
-blockIp=$2
-iqn1=$3
-blockIp1=$4
-echo $iqn >> /tmp/log
-echo $blockIp >> /tmp/log
-sudo iscsiadm -m node -o new -T $iqn -p $blockIp:3260
-sudo iscsiadm -m node -o update -T $iqn -n node.startup -v automatic
-sudo iscsiadm -m node -T $iqn -p $blockIp:3260 -l
-sudo iscsiadm -m node -o new -T $iqn1 -p $blockIp1:3260
-sudo iscsiadm -m node -o update -T $iqn1 -n node.startup -v automatic
-sudo iscsiadm -m node -T $iqn1 -p $blockIp1:3260 -l
-
-sleep 20
-
 sudo useradd dbadmin
 sudo echo -e "dbadmin ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 sleep 5
@@ -177,9 +162,9 @@ sudo firewall-cmd --list-ports
 #restarting the tomcat server
 sudo /opt/apache-tomcat-8.0.41/bin/startup.sh
 
-#sudo service sshd restart
-#sudo systemctl stop firewalld
-#sudo systemctl disable firewalld
+sudo service sshd restart
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
 
 
 
